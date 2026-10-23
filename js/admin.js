@@ -52,6 +52,8 @@
     document.getElementById('appShell').style.display = 'block';
     document.querySelectorAll('[data-logo]').forEach(function (el){ el.innerHTML = C.logo(el.dataset.logo==='compact'?'compact':'full'); });
     buildSidebar();
+    const brand = document.querySelector('.sidebar-brand .logo');
+    if (brand) brand.addEventListener('click', function (e) { e.preventDefault(); navigate('overview'); closeSidebar(); });
     navigate('overview');
   }
   function setupLogin() {
@@ -196,18 +198,16 @@
         kpi('Demo doctors', counts.doctorsTotal, 'Sample profiles', 'amber', 'user') +
         kpi('Facilities needing correction', fCounts.needsCorrection + fCounts.possibleDuplicate, 'Flagged records', 'red', 'alert') +
       '</div>' +
-      '<div class="grid" style="grid-template-columns: 1fr 1fr; gap:16px;">' +
+      '<div class="overview-charts">' +
         panel('Appointments by month', 'Demonstration data', barChartFromObject(aStats.byMonth, 'var(--a-teal)')) +
         panel('Appointment status', 'Demonstration data', barChartFromObject(aStats.statuses, 'var(--a-navy)')) +
       '</div>' +
-      '<div class="grid" style="grid-template-columns: 1fr 1fr; gap:16px;">' +
+      '<div class="overview-charts">' +
         panel('Facilities by category', 'Demonstration data', facilitiesByCategoryChart()) +
         panel('Facility verification progress', 'Demonstration data', verificationChart(fCounts)) +
       '</div>' +
       panel('Recent activity', 'Actual interactions in the demo', recent.length ? '<ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:6px;">' +
         recent.map(function(a){ return '<li style="padding:8px 0; border-bottom:1px solid var(--a-line);"><span class="badge badge-muted">'+U.escapeHtml(a.type)+'</span> '+U.escapeHtml(a.message)+' <span class="muted" style="font-size:.75rem;">'+U.formatDateTime(a.createdAt)+'</span></li>'; }).join('') + '</ul>' : '<p class="muted">No activity yet.</p>');
-    // responsive grid fallback
-    root.querySelectorAll('.grid').forEach(function(g){ if (window.innerWidth < 900) g.style.gridTemplateColumns = '1fr'; });
   }
 
   function barChartFromObject(obj, color) {
@@ -783,13 +783,15 @@
     const aStats = D.Appointments.stats();
     const fCounts = D.Facilities.counts();
     root.innerHTML =
-      panel('Facility inventory report', 'Demonstration data', '<p>Total: '+counts.facilitiesTotal+' · Published: '+counts.facilitiesPublished+' · Pending verification: '+counts.facilitiesPending+'</p>' +
-        '<button class="btn btn-sm" id="repFac">Export facilities CSV</button>') +
-      panel('Appointment request report', 'Demonstration data', '<p>Total: '+counts.appointmentsTotal+' · Pending: '+counts.appointmentsPending+'</p>' +
-        '<div style="margin-top:8px;">'+barChartFromObject(aStats.statuses, 'var(--a-teal)')+'</div>' +
-        '<button class="btn btn-sm" id="repApt" style="margin-top:8px;">Export appointments CSV</button>') +
-      panel('Service availability report', 'Demonstration data', '<p>Service categories: '+counts.servicesTotal+' · Published: '+counts.servicesPublished+'</p>') +
-      panel('Facility verification report', 'Demonstration data', '<div>'+barChartFromObject({ 'Verified': fCounts.verified, 'Pending': fCounts.pending, 'Needs correction': fCounts.needsCorrection, 'Possible duplicate': fCounts.possibleDuplicate }, 'var(--a-amber)')+'</div>');
+      '<div class="report-grid">' +
+        panel('Facility inventory report', 'Demonstration data', '<p>Total: '+counts.facilitiesTotal+' · Published: '+counts.facilitiesPublished+' · Pending verification: '+counts.facilitiesPending+'</p>' +
+          '<button class="btn btn-sm" id="repFac">Export facilities CSV</button>') +
+        panel('Appointment request report', 'Demonstration data', '<p>Total: '+counts.appointmentsTotal+' · Pending: '+counts.appointmentsPending+'</p>' +
+          '<div style="margin-top:8px;">'+barChartFromObject(aStats.statuses, 'var(--a-teal)')+'</div>' +
+          '<button class="btn btn-sm" id="repApt" style="margin-top:8px;">Export appointments CSV</button>') +
+        panel('Service availability report', 'Demonstration data', '<p>Service categories: '+counts.servicesTotal+' · Published: '+counts.servicesPublished+'</p>') +
+        panel('Facility verification report', 'Demonstration data', '<div>'+barChartFromObject({ 'Verified': fCounts.verified, 'Pending': fCounts.pending, 'Needs correction': fCounts.needsCorrection, 'Possible duplicate': fCounts.possibleDuplicate }, 'var(--a-amber)')+'</div>') +
+      '</div>';
     root.querySelector('#repFac').addEventListener('click', function(){ U.downloadText('facilities.csv', D.exportFacilitiesCSV(), 'text/csv'); U.toast('CSV exported.', 'success'); });
     root.querySelector('#repApt').addEventListener('click', function(){ U.downloadText('appointments.csv', D.exportAppointmentsCSV(), 'text/csv'); U.toast('CSV exported.', 'success'); });
   }

@@ -7,7 +7,7 @@ A frontend-only demonstration of how a modern digital platform could support a m
 ## Live demo
 
 - **Public website:** https://oasis-healthcare-group-demo.vercel.app/
-- **Admin dashboard:** https://oasis-healthcare-group-demo.vercel.app/admin.html
+- **Admin dashboard:** https://oasis-healthcare-group-demo.vercel.app/admin
 - **Source code:** https://github.com/Pefrika-dev/oasis-healthcare-group-demo
 - **Admin login:** `admin` / `demo` (demonstration only — not secure)
 
@@ -113,7 +113,9 @@ Open `index.html` from the server root. The public site is a single-page experie
 
 ## 6. How to access the admin dashboard
 
-Open `admin.html` from the same server root, or use the **Admin dashboard** link in the public footer.
+Locally, open `admin.html` from the same server root, or use the **Admin dashboard** link in the public footer.
+
+On the live Vercel deployment, use the short URL **`/admin`** (or `/dashboard`). Both are rewritten to `admin.html` by `vercel.json`. The original `/admin.html` also continues to work.
 
 ---
 
