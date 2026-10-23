@@ -4,6 +4,13 @@
 
 A frontend-only demonstration of how a modern digital platform could support a multi-facility healthcare group in Kenya: a public patient experience plus a functional administrative dashboard sharing one data model.
 
+## Live demo
+
+- **Public website:** https://oasis-healthcare-group-demo.vercel.app/
+- **Admin dashboard:** https://oasis-healthcare-group-demo.vercel.app/admin.html
+- **Source code:** https://github.com/Pefrika-dev/oasis-healthcare-group-demo
+- **Admin login:** `admin` / `demo` (demonstration only — not secure)
+
 ---
 
 ## 1. Project overview
@@ -166,13 +173,21 @@ OasisData.resetData();
 
 The project is a static site and can be deployed to Vercel, Netlify, Cloudflare Pages or GitHub Pages.
 
-**Vercel:** import the folder as a project, framework preset **Other**, build command empty, output directory `.` (root).
+**Current deployment:** Vercel project `oasis-healthcare-group-demo` at https://oasis-healthcare-group-demo.vercel.app/
 
-Before deployment:
-1. Replace the canonical placeholder `https://example.com/` in `index.html` with the intended URL.
-2. Update `sitemap.xml` with the real domain.
-3. Keep `admin.html` out of public indexing (`noindex` is already set).
-4. Remove or replace demonstration login and data before any real deployment.
+**Vercel CLI redeploy:**
+
+```bash
+vercel deploy --prod --project oasis-healthcare-group-demo
+```
+
+**Fresh Vercel import:** import the folder as a project, framework preset **Other**, build command empty, output directory `.` (root).
+
+Before any real deployment:
+1. Replace the demonstration login with server-side authentication.
+2. Keep `admin.html` out of public indexing (`noindex` is already set).
+3. Update the canonical URL, Open Graph URL and `sitemap.xml` if the domain changes.
+4. Replace demonstration data and remove localStorage persistence before collecting real patient information.
 
 ---
 
