@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Oasis Healthcare Group — Admin Dashboard (Demo)</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="Demonstration administration dashboard for the Oasis Healthcare Group concept platform. Local demo data only.">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/admin.css?v=6">
+</head>
+<body class="admin">
+  <!-- Login screen -->
+  <div id="loginScreen" class="login-wrap">
+    <div class="login-card">
+      <div data-logo="compact" style="display:flex; justify-content:center; margin-bottom:12px;"></div>
+      <h1>Admin Dashboard</h1>
+      <p>Demonstration interface only</p>
+      <div class="login-demo">
+        <strong>Demo credentials (local testing only):</strong><br>
+        Username: <code>admin</code><br>
+        Password: <code>demo</code><br>
+        <span style="color:#b91c1c;">This is not secure production authentication.</span>
+      </div>
+      <form id="loginForm">
+        <div class="field"><label for="lUser">Username</label><input id="lUser" type="text" autocomplete="username" required></div>
+        <div class="field"><label for="lPass">Password</label><input id="lPass" type="password" autocomplete="current-password" required></div>
+        <button class="btn btn-primary" type="submit" style="width:100%; justify-content:center;">Sign in (demo)</button>
+        <p id="loginErr" style="color:#b91c1c; font-size:.85rem; margin-top:8px; display:none;"></p>
+      </form>
+      <p style="margin-top:16px; font-size:.8rem;"><a href="index.html">← Back to public site</a></p>
+    </div>
+  </div>
+
+  <!-- App shell -->
+  <div id="appShell" style="display:none;">
+    <div class="demo-banner">
+      <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10.3 3.8 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.8a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg></span>
+      <span><strong>DEMO MODE.</strong> Data is stored in your browser (localStorage). No real hospital systems are connected. Do not use for real patient data.</span>
+    </div>
+    <div class="admin-shell">
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar-brand">
+          <div data-logo="compact"></div>
+        </div>
+        <nav class="sidebar-nav" id="sideNav"></nav>
+        <div class="sidebar-foot">v1.0 · Concept demo</div>
+      </aside>
+      <div class="sidebar-backdrop" id="sideBackdrop"></div>
+      <div class="main">
+        <header class="topbar">
+          <div style="display:flex; align-items:center; gap:12px;">
+            <button class="btn btn-sm sidebar-toggle" id="sideToggle">☰</button>
+            <div>
+              <div class="topbar-title" id="pageTitle">Overview</div>
+              <div class="topbar-sub" id="pageSub">Demonstration dashboard</div>
+            </div>
+          </div>
+          <div class="topbar-actions">
+            <div class="search-box">
+              <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></span>
+              <input id="globalSearch" type="search" placeholder="Search…">
+            </div>
+            <button class="btn btn-sm btn-ghost" id="notifBtn" aria-label="Notifications" style="position:relative;">
+              <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></span>
+              <span id="notifCount" class="badge badge-danger" aria-hidden="true" style="position:absolute; top:-6px; right:-6px; display:none;">0</span>
+            </button>
+            <div class="profile-menu">
+              <div class="avatar">A</div>
+              <button class="btn btn-sm btn-ghost" id="logoutBtn">Logout</button>
+            </div>
+          </div>
+        </header>
+        <main class="content" id="content"></main>
+      </div>
+    </div>
+  </div>
+
+  <div id="toastHost" class="toast-host" aria-live="polite"></div>
+
+  <script src="js/utils.js?v=3"></script>
+  <script src="js/data.js?v=3"></script>
+  <script src="js/components.js?v=3"></script>
+  <script src="js/admin.js?v=4"></script>
+</body>
+</html>

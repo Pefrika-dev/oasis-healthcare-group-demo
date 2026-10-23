@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /admin.html
+
+# Replace example.com with the deployed domain before publishing.
+Sitemap: https://example.com/sitemap.xml

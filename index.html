@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Oasis Healthcare Group — Healthcare That Moves With You (Concept Demo)</title>
+  <meta name="description" content="Independent concept demonstration of a digital healthcare platform for a multi-facility healthcare group in Kenya. Find facilities, services, doctors and request appointments.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://example.com/">
+  <meta property="og:title" content="Oasis Healthcare Group — Healthcare That Moves With You">
+  <meta property="og:description" content="Concept demonstration of a digital healthcare platform for a multi-facility healthcare group in Kenya.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/og-image.svg">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css?v=7">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <div data-logo></div>
+      <nav id="siteNav" class="site-nav" aria-label="Primary"></nav>
+      <div class="header-actions">
+        <a class="btn btn-sm btn-ghost header-emergency" href="tel:0701302302" style="white-space:nowrap;">Emergency: 0701 302 302</a>
+        <button id="menuToggle" class="menu-toggle" aria-label="Open menu" aria-expanded="false">
+          <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div id="navDrawer" class="nav-drawer" aria-hidden="true" inert>
+    <div class="backdrop"></div>
+    <div class="panel">
+      <div class="drawer-head">
+        <div data-logo="compact"></div>
+        <button class="modal-close" data-drawer-close aria-label="Close menu">&times;</button>
+      </div>
+      <div id="drawerLinks"></div>
+    </div>
+  </div>
+
+  <main id="main">
+    <section id="home" class="hero"><div class="container" id="hero"></div></section>
+
+    <section id="about" class="section"></section>
+
+    <section id="facilities" class="section" style="background: var(--c-bg-2);"></section>
+
+    <section id="services" class="section"></section>
+
+    <section id="doctors" class="section" style="background: var(--c-bg-2);"></section>
+
+    <section id="appointment" class="section"></section>
+
+    <section id="resources" class="section" style="background: var(--c-bg-2);"></section>
+
+    <section id="contact" class="section"></section>
+  </main>
+
+  <footer id="siteFooter" class="site-footer"></footer>
+
+  <div id="toastHost" class="toast-host" aria-live="polite"></div>
+
+  <script src="js/utils.js?v=3"></script>
+  <script src="js/data.js?v=3"></script>
+  <script src="js/components.js?v=3"></script>
+  <script src="js/main.js?v=3"></script>
+</body>
+</html>
