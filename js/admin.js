@@ -100,8 +100,15 @@
     const toggle = document.getElementById('sideToggle');
     const sidebar = document.getElementById('sidebar');
     const backdrop = document.getElementById('sideBackdrop');
-    if (toggle) toggle.addEventListener('click', function(){ sidebar.classList.toggle('open'); backdrop.classList.toggle('open'); });
+    if (toggle) toggle.addEventListener('click', function(){
+      const open = sidebar.classList.toggle('open');
+      backdrop.classList.toggle('open', open);
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
+    });
     if (backdrop) backdrop.addEventListener('click', closeSidebar);
+    const close = document.getElementById('sideClose');
+    if (close) close.addEventListener('click', closeSidebar);
     const logout = document.getElementById('logoutBtn');
     if (logout) logout.addEventListener('click', logout);
     const gs = document.getElementById('globalSearch');
@@ -137,11 +144,21 @@
   function closeSidebar() {
     document.getElementById('sidebar').classList.remove('open');
     document.getElementById('sideBackdrop').classList.remove('open');
+    const toggle = document.getElementById('sideToggle');
+    if (toggle) {
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-label', 'Open navigation menu');
+    }
   }
 
   function navigate(view) {
     state.view = view;
-    document.querySelectorAll('.nav-item').forEach(function (b){ b.classList.toggle('active', b.dataset.view === view); });
+    document.querySelectorAll('.nav-item').forEach(function (b){
+      const on = b.dataset.view === view;
+      b.classList.toggle('active', on);
+      if (on) b.setAttribute('aria-current', 'page');
+      else b.removeAttribute('aria-current');
+    });
     const meta = NAV.find(function (n){return n.id===view;});
     document.getElementById('pageTitle').textContent = meta ? meta.label : view;
     document.getElementById('pageSub').textContent = 'Dashboard / ' + (meta ? meta.label : view);

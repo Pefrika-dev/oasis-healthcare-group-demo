@@ -19,6 +19,7 @@
     buildNav();
     setupMobileNav();
     setupSmoothScroll();
+    setupScrollSpy();
     renderHero();
     renderFacilityFinder();
     renderServices();
@@ -44,11 +45,11 @@
   function buildNav() {
     const links = [
       { href:'#home', label:'Home' },
-      { href:'#about', label:'About Oasis' },
-      { href:'#facilities', label:'Our Facilities' },
-      { href:'#services', label:'Medical Services' },
-      { href:'#doctors', label:'Find a Doctor' },
-      { href:'#resources', label:'Patient Resources' },
+      { href:'#about', label:'About' },
+      { href:'#facilities', label:'Facilities' },
+      { href:'#services', label:'Services' },
+      { href:'#doctors', label:'Doctors' },
+      { href:'#resources', label:'Resources' },
       { href:'#contact', label:'Contact' }
     ];
     const nav = document.getElementById('siteNav');
@@ -63,8 +64,20 @@
     const toggle = document.getElementById('menuToggle');
     const drawer = document.getElementById('navDrawer');
     if (!toggle || !drawer) return;
-    function open() { drawer.classList.add('open'); drawer.setAttribute('aria-hidden','false'); drawer.removeAttribute('inert'); toggle.setAttribute('aria-expanded','true'); }
-    function close() { drawer.classList.remove('open'); drawer.setAttribute('aria-hidden','true'); drawer.setAttribute('inert',''); toggle.setAttribute('aria-expanded','false'); }
+    function open() {
+      drawer.classList.add('open');
+      drawer.setAttribute('aria-hidden','false');
+      drawer.removeAttribute('inert');
+      toggle.setAttribute('aria-expanded','true');
+      toggle.setAttribute('aria-label','Close navigation menu');
+    }
+    function close() {
+      drawer.classList.remove('open');
+      drawer.setAttribute('aria-hidden','true');
+      drawer.setAttribute('inert','');
+      toggle.setAttribute('aria-expanded','false');
+      toggle.setAttribute('aria-label','Open navigation menu');
+    }
     toggle.addEventListener('click', function(){ drawer.classList.contains('open') ? close() : open(); });
     drawer.querySelector('.backdrop').addEventListener('click', close);
     const closeBtn = drawer.querySelector('[data-drawer-close]');
@@ -93,6 +106,40 @@
         if (home) home.scrollIntoView({ behavior:'smooth' });
       }
     });
+  }
+
+  function setupScrollSpy() {
+    const sections = Array.from(document.querySelectorAll('main > section[id]'));
+    const links = Array.from(document.querySelectorAll('#siteNav a[href^="#"], #drawerLinks a[href^="#"]')).filter(function (a) { return !a.classList.contains('btn'); });
+    if (!sections.length || !links.length) return;
+    const header = document.querySelector('.site-header');
+    let frame = null;
+
+    function update() {
+      frame = null;
+      const probe = (header ? header.offsetHeight : 72) + 32;
+      let current = sections[0].id;
+      sections.forEach(function (section) {
+        if (section.getBoundingClientRect().top <= probe) current = section.id;
+      });
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 8) {
+        current = sections[sections.length - 1].id;
+      }
+      links.forEach(function (link) {
+        const on = link.getAttribute('href') === '#' + current;
+        link.classList.toggle('active', on);
+        if (on) link.setAttribute('aria-current', 'location');
+        else link.removeAttribute('aria-current');
+      });
+    }
+
+    function requestUpdate() {
+      if (frame === null) frame = requestAnimationFrame(update);
+    }
+
+    update();
+    window.addEventListener('scroll', requestUpdate, { passive: true });
+    window.addEventListener('resize', requestUpdate);
   }
 
   // ---------- hero ----------

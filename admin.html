@@ -7,7 +7,7 @@
   <meta name="robots" content="noindex, nofollow">
   <meta name="description" content="Demonstration administration dashboard for the Oasis Healthcare Group concept platform. Local demo data only.">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="css/admin.css?v=9">
+  <link rel="stylesheet" href="css/admin.css?v=11">
 </head>
 <body class="admin">
   <!-- Login screen -->
@@ -42,6 +42,7 @@
       <aside class="sidebar" id="sidebar">
         <div class="sidebar-brand">
           <div data-logo></div>
+          <button class="sidebar-close" id="sideClose" aria-label="Close navigation menu">&times;</button>
         </div>
         <nav class="sidebar-nav" id="sideNav"></nav>
         <div class="sidebar-foot">v1.0 · Concept demo</div>
@@ -50,7 +51,10 @@
       <div class="main">
         <header class="topbar">
           <div style="display:flex; align-items:center; gap:12px;">
-            <button class="btn btn-sm sidebar-toggle" id="sideToggle">☰</button>
+            <button class="btn btn-sm sidebar-toggle" id="sideToggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="sidebar">
+              <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></span>
+              <span class="sidebar-toggle-label">Menu</span>
+            </button>
             <div>
               <div class="topbar-title" id="pageTitle">Overview</div>
               <div class="topbar-sub" id="pageSub">Demonstration dashboard</div>
@@ -82,6 +86,6 @@
   <script src="js/utils.js?v=3"></script>
   <script src="js/data.js?v=3"></script>
   <script src="js/components.js?v=3"></script>
-  <script src="js/admin.js?v=6"></script>
+  <script src="js/admin.js?v=8"></script>
 </body>
 </html>
