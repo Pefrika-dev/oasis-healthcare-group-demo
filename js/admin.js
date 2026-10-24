@@ -109,8 +109,8 @@
     if (backdrop) backdrop.addEventListener('click', closeSidebar);
     const close = document.getElementById('sideClose');
     if (close) close.addEventListener('click', closeSidebar);
-    const logout = document.getElementById('logoutBtn');
-    if (logout) logout.addEventListener('click', logout);
+    const logoutBtn = document.getElementById('logoutBtn');
+    if (logoutBtn) logoutBtn.addEventListener('click', function () { logout(); });
     const gs = document.getElementById('globalSearch');
     if (gs) gs.addEventListener('input', U.debounce(function(){
       const q = gs.value.trim();
