@@ -23,10 +23,9 @@
   const SESSION_KEY = 'oasis_admin_session_v1';
   function isLoggedIn() { return sessionStorage.getItem(SESSION_KEY) === '1'; }
   function login(u, p) {
-    const s = D.Settings.get();
-    const creds = (s.demoCredentials) || { username:'admin', password:'demo' };
-    if (u === creds.username && p === creds.password) {
-      sessionStorage.setItem(SESSION_KEY, '1');
+    const roles = { admin: 'admin', doctor: 'doctor', accountant: 'accountant', receptionist: 'receptionist' };
+    if (p === 'demo' && roles[u]) {
+      sessionStorage.setItem(SESSION_KEY, JSON.stringify({ user: u, role: roles[u], ts: Date.now() }));
       return true;
     }
     return false;
@@ -54,7 +53,11 @@
     buildSidebar();
     const brand = document.querySelector('.sidebar-brand .logo');
     if (brand) brand.addEventListener('click', function (e) { e.preventDefault(); navigate('overview'); closeSidebar(); });
-    navigate('overview');
+    const session = sessionStorage.getItem(SESSION_KEY);
+    let role = 'admin';
+    try { const s = JSON.parse(session||'{}'); role = s.role || 'admin'; } catch (e) {}
+    const defaults = { admin: 'overview', doctor: 'appointments', accountant: 'reports', receptionist: 'enquiries' };
+    navigate(defaults[role] || 'overview');
   }
   function setupLogin() {
     const form = document.getElementById('loginForm');
