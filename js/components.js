@@ -116,6 +116,7 @@
         '<div class="card-actions">' +
           '<button class="btn btn-sm btn-primary" data-action="facility-details" data-id="' + U.escapeHtml(f.id) + '">View details</button>' +
           (phone ? '<a class="btn btn-sm btn-ghost" href="' + U.telHref(phone) + '">' + OasisComponents.icon('phone') + ' Call</a>' : '') +
+          '<a class="btn btn-sm btn-ghost" href="https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent((f.name||'') + ', ' + (f.town||'') + ', ' + (f.county||'')) + '" target="_blank" rel="noopener">Maps</a>' +
           '<button class="btn btn-sm btn-ghost" data-action="facility-appoint" data-id="' + U.escapeHtml(f.id) + '">Request appointment</button>' +
         '</div>' +
       '</div>' +

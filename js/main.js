@@ -212,11 +212,7 @@
           '<div id="facilityResults" class="grid grid-3"></div>' +
           '<div id="facilityEmpty"></div>' +
         '</div>' +
-        '<div class="map-panel" style="margin-top:20px;">' +
-          C.icon('map') +
-          '<p><strong>Location presentation (demo)</strong></p>' +
-          '<p style="font-size:.85rem;">A live map integration is not included in this demonstration. Directions are offered only when a verified address exists; otherwise contact the facility to confirm the location.</p>' +
-        '</div>' +
+        '<div class="map-panel" style="margin-top:20px;border-radius:12px;overflow:hidden;border:1px solid var(--c-line);"><iframe title="Facility locations" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15955.0!2d36.8219!3d-1.2921!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f10d229d6eb01%3A0xf6bc3bba3a35a26b!2sNairobi!5e0!3m2!1sen!2ske!4v0!5m2!1sen!2ske" width="100%" height="380" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>' +
       '</div>';
     const q = document.getElementById('facQ');
     const cat = document.getElementById('facCat');
